@@ -1,3 +1,6 @@
+import torch
+import os
+
 class Trainer:
     def __init__(self, model, num_epochs, optimizer, criterion, device):
         self.num_epochs = num_epochs
@@ -30,7 +33,11 @@ class Trainer:
             self.best_epoch = epoch
             self.best_model = self.model.state_dict()
 
-            filename = f'best_model_epoch{epoch}_dice{dice:.4f}.pth'
+            log_directory = 'log'
+            os.makedirs(log_directory, exist_ok=True)
+
+            # Specify the file path for saving the model
+            filename = f'{log_directory}/best_model_epoch{epoch}_dice{dice:.4f}.pth'
             torch.save(self.best_model, filename)
 
     def train(self, train_loader, val_loader):

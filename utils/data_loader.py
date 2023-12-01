@@ -1,3 +1,6 @@
+from torch.utils.data import Dataset
+from PIL import Image
+
 class CustomImageMaskDataset(Dataset):
     def __init__(self, dataframe, image_transform=None):
         self.data = dataframe

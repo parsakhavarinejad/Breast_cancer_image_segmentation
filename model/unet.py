@@ -1,4 +1,5 @@
 from .unet_parts import ConvBlock, Encoder, Decoder
+import torch.nn as nn
 
 class Unet(nn.Module):
 
