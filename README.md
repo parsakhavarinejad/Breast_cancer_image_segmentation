@@ -14,7 +14,6 @@ This project implements a U-Net model for breast cancer image segmentation using
 - [Model Architecture](#model-architecture)
 - [Results](#results)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Getting Started
 
@@ -65,6 +64,3 @@ After training, view some results, including images and loss plots:
 
 Feel free to contribute to the project.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
