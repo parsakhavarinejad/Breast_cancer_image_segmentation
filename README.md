@@ -55,7 +55,7 @@ If you want to try the project, download the dataset and place it inside the `da
 
 The U-Net model is well-suited for medical image segmentation. For more details on the U-Net architecture, refer to the image below:
 
-![U-Net Architecture](unet-architecture.png)
+![U-Net Architecture](unet_architecture.png)
 
 ## Results
 
