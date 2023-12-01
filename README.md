@@ -45,6 +45,8 @@ This project implements a U-Net model for breast cancer image segmentation using
 The dataset is available on Kaggle:
 [https://www.kaggle.com/datasets/aryashah2k/breast-ultrasound-images-dataset/](https://www.kaggle.com/datasets/aryashah2k/breast-ultrasound-images-dataset/)
 
+The Breast Ultrasound Dataset, collected in 2018 from 600 female patients aged 25 to 75, consists of 780 ultrasound images in PNG format, each with an average size of 500x500 pixels. Enriched with ground truth images, it categorizes cases into normal, benign, and malignant, making it a valuable resource for machine learning models in breast cancer detection, classification, and segmentation. This well-annotated dataset contributes significantly to advancing research in medical imaging applications.
+
 If you want to try the project, download the dataset and place it inside the `data` folder.
 
 
