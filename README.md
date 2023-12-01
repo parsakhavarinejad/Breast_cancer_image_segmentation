@@ -47,6 +47,10 @@ The dataset is available on Kaggle:
 
 If you want to try the project, download the dataset and place it inside the `data` folder.
 
+
+![sample data](sample.png)
+
+
 ## Model Architecture
 
 The U-Net model is well-suited for medical image segmentation. For more details on the U-Net architecture, refer to the image below:
