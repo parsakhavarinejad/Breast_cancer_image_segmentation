@@ -64,7 +64,7 @@ The U-Net model is well-suited for medical image segmentation. For more details 
 After training, view some results, including images and loss plots:
 
 - Example results: 
-![Test Image](pred_.jpg)
+![Test Image](pred_.png)
 - Loss plots: 
 ![Loss Image](loss.jpg)
 
