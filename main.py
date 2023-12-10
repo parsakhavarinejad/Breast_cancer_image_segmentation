@@ -30,22 +30,25 @@ print(f"Test shape: {test.shape}")
 
 
 # Define transformations
+image_size = 128
+    
 train_transforms = transforms.Compose([
-    transforms.Resize([240, 240]),
-    transforms.ToTensor()
+    transforms.Resize([image_size, image_size]),
+    transforms.ToTensor(),
 ])
 
 val_transforms = transforms.Compose([
-    transforms.Resize([240, 240]),
-    transforms.ToTensor()
+    transforms.Resize([image_size, image_size]),
+    transforms.ToTensor(),
 ])
+
 
 # Create datasets
 train_dataset = CustomImageMaskDataset(train, train_transforms)
 test_dataset = CustomImageMaskDataset(test, val_transforms)
 
 # Create DataLoaders
-batch_size = 4
+batch_size = 16
 train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
@@ -63,20 +66,20 @@ for batch in train_dataloader:
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-unet = Unet().to(device)
+unet = Unet(1).to(device)
 learning_rate = 0.0001
-weight_decay = 1e-4
+weight_decay = 1e-6
 
 optimizer = torch.optim.Adam(unet.parameters(), lr=learning_rate, weight_decay=weight_decay)
 
-trainer = Trainer(model=unet, num_epochs=80, optimizer=optimizer, criterion=bce_dice_loss, device=device)
+trainer = Trainer(model=unet, num_epochs=10, optimizer=optimizer, criterion=bce_dice_loss, device=device)
 
 trainer.train(train_dataloader, test_dataloader)
 metrics = trainer.get_metrics()
 
 plot_metrics(metrics)
 
-for i in [2, 3, 10, 20, 55, 66, 87, 98]:
+for i in [2, 3, 11, 20, 55, 67, 87, 98, 120, 130, 200]:
     image = train_dataset[i][0]
     mask = train_dataset[i][1]
     im = image.to(device)

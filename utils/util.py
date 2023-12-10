@@ -81,29 +81,26 @@ def to_numpy(tensor):
     # Move tensor to CPU and convert to NumPy array
     return tensor.cpu().detach().numpy()
 
-def plot_subplots(image, mask, predicted):
+def threshold_prediction(predicted, threshold=0.5):
+    # Threshold predicted values
+    predicted[predicted < threshold] = 0
+    predicted[predicted >= threshold] = 1
+    return predicted
+
+def plot_subplots(image, mask, predicted, threshold=0.5):
     # Convert tensors to NumPy arrays
-    image_np = to_numpy(image)
-    image_np = image_np.squeeze()
-    mask_np = to_numpy(mask)
-    mask_np = mask_np.squeeze()
-    predicted_np = to_numpy(predicted)
+    image_np, mask_np, predicted_np = map(to_numpy, (image, mask, predicted))
 
-    fig, axes = plt.subplots(1, 3, figsize=(5, 3))
+    # Threshold the predicted values
+    predicted_np_thresholded = threshold_prediction(predicted_np, threshold)
 
-    # Plot Image
-    axes[0].imshow(image_np)
-    axes[0].set_title('Image')
-    axes[0].axis('off')
+    fig, axes = plt.subplots(1, 3, figsize=(10, 5))  # Adjust figsize as needed
 
-    # Plot Mask
-    axes[1].imshow(mask_np, cmap='gray')
-    axes[1].set_title('Mask')
-    axes[1].axis('off')
-
-    # Plot Predicted
-    axes[2].imshow(predicted_np, cmap='gray')
-    axes[2].set_title('Predicted')
-    axes[2].axis('off')
+    # Plot Image, Mask, Predicted, and Thresholded Predicted
+    titles = ['Image', 'Mask', 'Predicted']
+    for ax, data, title in zip(axes, [image_np, mask_np, predicted_np, predicted_np_thresholded], titles):
+        ax.imshow(data.squeeze(), cmap='gray' if 'Mask' in title else 'gray')
+        ax.set_title(title)
+        ax.axis('off')
 
     plt.show()
